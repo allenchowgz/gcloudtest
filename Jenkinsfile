@@ -21,9 +21,7 @@ pipeline {
         }
         stage("Push image") {
             steps {
-			     sh '''
-				 docker push asia-east1-docker.pkg.dev/pxgo-358502/pxgo-22/hello:${env.BUILD_ID}
-				 '''
+			     sh "docker push asia-east1-docker.pkg.dev/pxgo-358502/pxgo-22/hello:${env.BUILD_ID}"
 			    
                 //script {
                 //    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
