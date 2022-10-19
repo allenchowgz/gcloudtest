@@ -48,14 +48,24 @@ pipeline {
 
 // email 
    }
-    post {
-        always {
-            emailext(
-                body: '${FILE,path="email.html"}',
-                subject: '构建通知：${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}!',
-                recipientProviders: [developers()],
-                to: 'allen_zhou@comwave.com.cn'
-                )
+      post {
+        success {
+            emailext (
+                subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                    <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+                to: "allen_zhou@comwave.com,18520619287@163.com",
+                from: "jenkins@qq.com"
+            )
+        }
+        failure {
+            emailext (
+                subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+                    <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+                to: "allen_zhou@comwave.com,18520619287@163.com",
+                from: "jenkins@qq.com"
+            )
         }
     }
 
