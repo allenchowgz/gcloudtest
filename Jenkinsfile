@@ -51,12 +51,13 @@ pipeline {
 
 
 
-stage('Test') {
+stage('Email to Allen') {
       steps {
         emailext (
-                  body:'''${PROPFILE,file="env.properties",property="projectStatus"}''',
                   subject:'${JOB_NAME}', 
-                  to:'allen_zhou@comwave.com.cn')
+                  body:'''${PROPFILE,file="env.properties",property="projectStatus"}''',
+                  to:'allen_zhou@comwave.com.cn'
+                 )
       }
     }
 //---
