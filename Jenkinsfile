@@ -33,6 +33,7 @@ pipeline {
         }
         stage('Deploy to GKE') {
             steps{
+                sh "echo ${IMAGE_TAG}"
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', 
 				projectId: env.PROJECT_ID, 
