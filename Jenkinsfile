@@ -47,6 +47,7 @@ pipeline {
 
 
 // email 
+   }
     post {
         always {
             emailext(
@@ -58,5 +59,4 @@ pipeline {
         }
     }
 
-    }
 }
