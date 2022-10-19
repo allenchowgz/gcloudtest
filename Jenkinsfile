@@ -47,6 +47,19 @@ pipeline {
 
 
 // email 
+
+
+
+
+stage('Test') {
+      steps {
+        writeFile file: 'env.properties', text: "projectStatus=${projectStatus}"
+        emailext body: '''${PROPFILE,file="env.properties",property="projectStatus"}
+        ''',subject: '${JOB_NAME}', to: 'allen_zhou@comwave.com.cn;', from: '17302062@qq.com'
+      }
+    }
+//---
+
    }
 
     post {
