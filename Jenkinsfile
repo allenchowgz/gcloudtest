@@ -44,5 +44,19 @@ pipeline {
 				verifyDeployments: true])
             }
         }
+
+
+// email 
+    post {
+        always {
+            emailext(
+                body: '${FILE,path="email.html"}',
+                subject: '构建通知：${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}!',
+                recipientProviders: [developers()],
+                to: 'allen_zhou@comwave.com.cn'
+                )
+        }
+    }
+
     }
 }
