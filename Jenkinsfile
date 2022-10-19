@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Deploy to GKE') {
             steps{
-                input message:"Proceed with final deployment?"
+                // input message:"Proceed with final deployment?"
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', 
 				projectId: env.PROJECT_ID, 
